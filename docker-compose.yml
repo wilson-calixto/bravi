@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  crud-backend:
+    container_name: crud-backend
+
+    build: ./fastapi-crud/src
+    command: |
+      bash -c 'uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 3000'
+
+    volumes:
+      - ./fastapi-crud/src/:/usr/src/app/
+    ports:
+      - 3000:3000
+    networks:
+      - crud-network
+
+  crud-frontend:
+    container_name: crud-frontend2
+    build:
+      context: ./AngularCRUD
+      dockerfile: Dockerfile
+    volumes:
+      - "./AngularCRUD:/app"
+      - "/app/node_modules"
+    ports:
+      - 4200:4200
+    depends_on:
+      - "crud-backend"
+    networks:
+      - crud-network
+
+networks:
+  crud-network:
+    driver: bridge

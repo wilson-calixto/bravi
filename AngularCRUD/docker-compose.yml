@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  crud-frontend:
+    container_name: crud-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - 4200:4200
+
+    networks:
+      - crud-network
+
+networks:
+  crud-network:
+    driver: bridge
