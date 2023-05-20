@@ -34,7 +34,7 @@ export class EditEmployeeComponent implements OnInit {
     this.httpProvider.getEmployeeDetailById(this.employeeId).subscribe(
       (data: any) => {
         if (data != null && data.body != null) {
-          var resultData = data.body;
+          var resultData = data.body.User;
           if (resultData) {
             this.editEmployeeForm.id = resultData.id;
             this.editEmployeeForm.firstName = resultData.firstName;
@@ -56,8 +56,8 @@ export class EditEmployeeComponent implements OnInit {
         async (data) => {
           if (data != null && data.body != null) {
             var resultData = data.body;
-            if (resultData != null && resultData.isSuccess) {
-              if (resultData != null && resultData.isSuccess) {
+            if (resultData != null && resultData.Status) {
+              if (resultData != null && resultData.Status) {
                 this.toastr.success(resultData.message);
                 setTimeout(() => {
                   this.router.navigate(['/Home']);
