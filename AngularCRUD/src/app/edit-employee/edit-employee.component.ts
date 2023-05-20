@@ -33,8 +33,8 @@ export class EditEmployeeComponent implements OnInit {
   getEmployeeDetailById() {
     this.httpProvider.getEmployeeDetailById(this.employeeId).subscribe(
       (data: any) => {
-        if (data != null && data.body != null) {
-          var resultData = data.body.User;
+        if (data != null && data.User != null) {
+          var resultData = data.User;
           if (resultData) {
             this.editEmployeeForm.id = resultData.id;
             this.editEmployeeForm.firstName = resultData.firstName;
@@ -54,10 +54,10 @@ export class EditEmployeeComponent implements OnInit {
     if (isValid) {
       this.httpProvider.saveEmployee(this.editEmployeeForm).subscribe(
         async (data) => {
-          if (data != null && data.body != null) {
-            var resultData = data.body;
-            if (resultData != null && resultData.Status) {
-              if (resultData != null && resultData.Status) {
+          if (data != null && data.status != null) {
+            var resultData = data;
+            if (resultData != null && resultData.status) {
+              if (resultData != null && resultData.status) {
                 this.toastr.success(resultData.message);
                 setTimeout(() => {
                   this.router.navigate(['/Home']);

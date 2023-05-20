@@ -71,11 +71,11 @@ export class HomeComponent implements OnInit {
   async getAllEmployee() {
     this.httpProvider.getAllEmployee().subscribe(
       (data: any) => {
-        if (data != null && data.body != null) {
-          var resultData = data.body;
+        if (data != null && data.Users != null) {
+          var resultData = data.Users;
           console.log(resultData);
           if (resultData) {
-            this.employeeList = resultData.Users;
+            this.employeeList = resultData;
           }
         }
       },
@@ -111,9 +111,10 @@ export class HomeComponent implements OnInit {
   deleteEmployee(employee: any) {
     this.httpProvider.deleteEmployeeById(employee.id).subscribe(
       (data: any) => {
-        if (data != null && data.body != null) {
-          var resultData = data.body;
-          if (resultData != null && resultData.isSuccess) {
+        console.log('deleteEmployee', data);
+        if (data != null) {
+          var resultData = data;
+          if (resultData != null && resultData.status) {
             this.toastr.success(resultData.message);
             this.getAllEmployee();
           }

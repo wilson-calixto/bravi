@@ -19,7 +19,7 @@ def get_users(
         .offset(skip)
         .all()
     )
-    return {"Status": "Success", "Results": len(users), "Users": users}
+    return {"status": "Success", "Results": len(users), "Users": users}
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
@@ -28,7 +28,7 @@ def create_user(payload: schemas.UserBaseSchema, db: Session = Depends(get_db)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return {"Status": "Success", "User": new_user, "message": "User created successfully"}
+    return {"status": "Success", "User": new_user, "message": "User created successfully"}
 
 
 @router.patch("/{userId}", status_code=status.HTTP_202_ACCEPTED)
@@ -49,7 +49,7 @@ def update_user(
     )
     db.commit()
     db.refresh(db_user)
-    return {"Status": "Success", "User": db_user}
+    return {"status": "Success", "User": db_user}
 
 
 @router.get("/{userId}", status_code=status.HTTP_200_OK)
@@ -60,7 +60,7 @@ def get_user(userId: int, db: Session = Depends(get_db)):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"No User with this id: `{userId}` found",
         )
-    return {"Status": "Success", "User": user}
+    return {"status": "Success", "User": user}
 
 
 @router.delete("/{userId}", status_code=status.HTTP_200_OK)
@@ -74,4 +74,4 @@ def delete_user(userId: int, db: Session = Depends(get_db)):
         )
     user_query.delete(synchronize_session=False)
     db.commit()
-    return {"Status": "Success", "Message": "User deleted successfully"}
+    return {"status": "Success", "message": "User deleted successfully"}

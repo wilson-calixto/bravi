@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { WebApiService } from './web-api.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // var apiUrl = 'localhost:3000';
 var apiUrl = '';
@@ -17,24 +17,37 @@ var httpLink = {
   providedIn: 'root',
 })
 export class HttpProviderService {
-  constructor(private webApiService: WebApiService) {}
+  constructor(private httpClient: HttpClient) {}
 
-  public getAllEmployee(): Observable<any> {
-    return this.webApiService.get(httpLink.getAllEmployee);
+  public getAllEmployee() {
+    return this.httpClient.get<any>(httpLink.getAllEmployee);
   }
 
-  public deleteEmployeeById(model: any): Observable<any> {
-    return this.webApiService.post(
-      httpLink.deleteEmployeeById + '/' + model,
-      ''
+  public getEmployeeDetailById(userId: any): Observable<any> {
+    return this.httpClient.get(httpLink.getEmployeeDetailById + '/' + userId);
+  }
+
+  public saveEmployee(userId: any): Observable<any> {
+    return this.httpClient.post(httpLink.saveEmployee, userId);
+  }
+  public deleteEmployeeById(userId: any): Observable<any> {
+    if (userId === null || userId === undefined) {
+      throw new Error(
+        'Required parameter ids was null or undefined when calling deleteUsingDELETE.'
+      );
+    }
+
+    return this.httpClient.request<boolean>(
+      'delete',
+      httpLink.deleteEmployeeById + '/' + userId,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: {
+          userId,
+        },
+      }
     );
-  }
-
-  public getEmployeeDetailById(model: any): Observable<any> {
-    return this.webApiService.get(httpLink.getEmployeeDetailById + '/' + model);
-  }
-
-  public saveEmployee(model: any): Observable<any> {
-    return this.webApiService.post(httpLink.saveEmployee, model);
   }
 }
