@@ -1,8 +1,10 @@
-import { Component, Input, OnInit, Type } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { HttpProviderService } from '../service/http-provider.service';
+import { User, UsersResponse } from '../models/User';
+import { BaseResponse } from '../models/Api';
 
 @Component({
   selector: 'ng-modal-confirm',
@@ -56,7 +58,8 @@ const MODALS: { [name: string]: Type<any> } = {
 })
 export class HomeComponent implements OnInit {
   closeResult = '';
-  employeeList: any = [];
+  employeeList: User[] = [];
+
   constructor(
     private router: Router,
     private modalService: NgbModal,
@@ -70,10 +73,9 @@ export class HomeComponent implements OnInit {
 
   async getAllEmployee() {
     this.httpProvider.getAllEmployee().subscribe(
-      (data: any) => {
+      (data: UsersResponse) => {
         if (data != null && data.Users != null) {
           const resultData = data.Users;
-          console.log(resultData);
           if (resultData) {
             this.employeeList = resultData;
           }
@@ -95,16 +97,19 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['AddEmployee']);
   }
 
-  deleteEmployeeConfirmation(employee: any) {
-    this.modalService.open(MODALS['deleteModal'], {
-      ariaLabelledBy: 'modal-basic-title',
-    });
+  deleteEmployeeConfirmation(employee: User) {
+    this.modalService
+      .open(MODALS['deleteModal'], {
+        ariaLabelledBy: 'modal-basic-title',
+      })
+      .result.then(() => {
+        this.deleteEmployee(employee);
+      });
   }
 
-  deleteEmployee(employee: any) {
+  deleteEmployee(employee: User) {
     this.httpProvider.deleteEmployeeById(employee.id).subscribe(
-      (data: any) => {
-        console.log('deleteEmployee', data);
+      (data: BaseResponse) => {
         if (data != null) {
           const resultData = data;
           if (resultData != null && resultData.status) {
@@ -113,8 +118,8 @@ export class HomeComponent implements OnInit {
           }
         }
       },
-      (error: any) => {
-        this.toastr.error('Operation error', error);
+      () => {
+        this.toastr.error('Operation error');
       }
     );
   }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpProviderService } from '../service/http-provider.service';
+import { User, UserResponse } from '../models/User';
 
 @Component({
   selector: 'app-edit-employee',
@@ -16,7 +17,7 @@ export class EditEmployeeComponent implements OnInit {
   employeeForm!: NgForm;
 
   isSubmitted = false;
-  employeeId: any;
+  employeeId!: number;
 
   constructor(
     private toastr: ToastrService,
@@ -32,7 +33,7 @@ export class EditEmployeeComponent implements OnInit {
 
   getEmployeeDetailById() {
     this.httpProvider.getEmployeeDetailById(this.employeeId).subscribe(
-      (data: any) => {
+      (data: UserResponse) => {
         if (data != null && data.User != null) {
           const resultData = data.User;
           if (resultData) {
@@ -45,13 +46,13 @@ export class EditEmployeeComponent implements OnInit {
           }
         }
       },
-      (error: any) => {
-        this.toastr.error('Operation error', error);
+      () => {
+        this.toastr.error('Operation error');
       }
     );
   }
 
-  EditEmployee(isValid: any) {
+  EditEmployee(isValid: boolean) {
     this.isSubmitted = true;
     if (isValid) {
       this.httpProvider.editEmployee(this.editEmployeeForm).subscribe(

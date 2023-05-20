@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpProviderService } from '../service/http-provider.service';
-import { PassThrough } from 'stream';
+import { BaseResponse } from '../models/Api';
 
 @Component({
   selector: 'app-add-employee',
@@ -27,21 +27,18 @@ export class AddEmployeeComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {}
 
-  AddEmployee(isValid: any) {
+  AddEmployee(isValid: boolean) {
     this.isSubmitted = true;
     if (isValid) {
       this.httpProvider.postEmployee(this.addEmployeeForm).subscribe(
-        async (data) => {
-          console.log(data);
+        async (data: BaseResponse) => {
           if (data != null && data.status != null) {
-            if (data != null && data.status != null) {
-              const resultData = data;
-              if (resultData != null && resultData.status) {
-                this.toastr.success(resultData.message);
-                setTimeout(() => {
-                  this.router.navigate(['/Home']);
-                }, 500);
-              }
+            const resultData = data;
+            if (resultData != null && resultData.status) {
+              this.toastr.success(resultData.message);
+              setTimeout(() => {
+                this.router.navigate(['/Home']);
+              }, 500);
             }
           }
         },
