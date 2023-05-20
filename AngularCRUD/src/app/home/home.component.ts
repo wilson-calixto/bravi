@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
     this.httpProvider.getAllEmployee().subscribe(
       (data: any) => {
         if (data != null && data.Users != null) {
-          var resultData = data.Users;
+          const resultData = data.Users;
           console.log(resultData);
           if (resultData) {
             this.employeeList = resultData;
@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
       (data: any) => {
         console.log('deleteEmployee', data);
         if (data != null) {
-          var resultData = data;
+          const resultData = data;
           if (resultData != null && resultData.status) {
             this.toastr.success(resultData.message);
             this.getAllEmployee();

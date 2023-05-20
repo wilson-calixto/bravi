@@ -25,7 +25,7 @@ export class ViewEmployeeComponent implements OnInit {
     this.httpProvider.getEmployeeDetailById(this.employeeId).subscribe(
       (data: any) => {
         if (data != null && data.User != null) {
-          var resultData = data.User;
+          const resultData = data.User;
           if (resultData) {
             this.employeeDetail = resultData;
           }

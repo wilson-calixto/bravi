@@ -15,7 +15,7 @@ export class EditEmployeeComponent implements OnInit {
   @ViewChild('employeeForm')
   employeeForm!: NgForm;
 
-  isSubmitted: boolean = false;
+  isSubmitted = false;
   employeeId: any;
 
   constructor(
@@ -76,10 +76,10 @@ export class EditEmployeeComponent implements OnInit {
 }
 
 export class employeeForm {
-  id: number = 0;
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  address: string = '';
-  phone: string = '';
+  id = 0;
+  firstName = '';
+  lastName = '';
+  email = '';
+  address = '';
+  phone = '';
 }

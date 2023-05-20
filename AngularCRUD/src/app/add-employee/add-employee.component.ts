@@ -15,7 +15,7 @@ export class AddEmployeeComponent implements OnInit {
   @ViewChild('employeeForm')
   employeeForm!: NgForm;
 
-  isSubmitted: boolean = false;
+  isSubmitted = false;
 
   constructor(
     private router: Router,
@@ -33,7 +33,7 @@ export class AddEmployeeComponent implements OnInit {
           console.log(data);
           if (data != null && data.status != null) {
             if (data != null && data.status != null) {
-              var resultData = data;
+              const resultData = data;
               if (resultData != null && resultData.status) {
                 this.toastr.success(resultData.message);
                 setTimeout(() => {
@@ -55,9 +55,9 @@ export class AddEmployeeComponent implements OnInit {
 }
 
 export class employeeForm {
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  address: string = '';
-  phone: string = '';
+  firstName = '';
+  lastName = '';
+  email = '';
+  address = '';
+  phone = '';
 }
