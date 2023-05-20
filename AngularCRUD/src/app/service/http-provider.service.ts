@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-// var apiUrl = 'localhost:3000';
-var apiUrl = '';
-// var apiUrl = "http://192.168.10.10:105";
-//TODO ajustar a questão do cors
-var httpLink = {
+const apiUrl = '';
+
+const httpLink = {
   getAllEmployee: apiUrl + '/api/users',
   deleteEmployeeById: apiUrl + '/api/users',
   getEmployeeDetailById: apiUrl + '/api/users',
