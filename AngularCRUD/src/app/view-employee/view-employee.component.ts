@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpProviderService } from '../service/http-provider.service';
-import { WebApiService } from '../service/web-api.service';
 
 @Component({
   selector: 'app-view-employee',
@@ -13,7 +12,6 @@ export class ViewEmployeeComponent implements OnInit {
   employeeDetail: any = [];
 
   constructor(
-    public webApiService: WebApiService,
     private route: ActivatedRoute,
     private httpProvider: HttpProviderService
   ) {}

@@ -33,9 +33,10 @@ export class HttpProviderService {
     return this.httpClient.patch(httpLink.saveEmployee + '/' + user.id, user);
   }
 
-  public saveEmployee(user: any): Observable<any> {
+  public postEmployee(user: any): Observable<any> {
     return this.httpClient.post(httpLink.saveEmployee, user);
   }
+
   public deleteEmployeeById(userId: any): Observable<any> {
     if (userId === null || userId === undefined) {
       throw new Error(
