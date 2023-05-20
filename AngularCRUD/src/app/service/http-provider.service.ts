@@ -26,14 +26,22 @@ export class HttpProviderService {
   public getEmployeeDetailById(userId: any): Observable<any> {
     return this.httpClient.get(httpLink.getEmployeeDetailById + '/' + userId);
   }
+  public editEmployee(user: any): Observable<any> {
+    if (user.id === null || user.id === undefined) {
+      throw new Error(
+        'Required parameter ids was null or undefined when calling editEmployee.'
+      );
+    }
+    return this.httpClient.patch(httpLink.saveEmployee + '/' + user.id, user);
+  }
 
-  public saveEmployee(userId: any): Observable<any> {
-    return this.httpClient.post(httpLink.saveEmployee, userId);
+  public saveEmployee(user: any): Observable<any> {
+    return this.httpClient.post(httpLink.saveEmployee, user);
   }
   public deleteEmployeeById(userId: any): Observable<any> {
     if (userId === null || userId === undefined) {
       throw new Error(
-        'Required parameter ids was null or undefined when calling deleteUsingDELETE.'
+        'Required parameter ids was null or undefined when calling deleteEmployeeById.'
       );
     }
 

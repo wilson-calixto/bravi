@@ -49,7 +49,7 @@ def update_user(
     )
     db.commit()
     db.refresh(db_user)
-    return {"status": "Success", "User": db_user}
+    return {"status": "Success", "User": db_user, "message": "User updated successfully"}
 
 
 @router.get("/{userId}", status_code=status.HTTP_200_OK)

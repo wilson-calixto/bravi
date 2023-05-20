@@ -52,7 +52,7 @@ export class EditEmployeeComponent implements OnInit {
   EditEmployee(isValid: any) {
     this.isSubmitted = true;
     if (isValid) {
-      this.httpProvider.saveEmployee(this.editEmployeeForm).subscribe(
+      this.httpProvider.editEmployee(this.editEmployeeForm).subscribe(
         async (data) => {
           if (data != null && data.status != null) {
             var resultData = data;
