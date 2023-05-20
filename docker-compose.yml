@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   crud-backend:
-    container_name: crud-backend
+    container_name: crud-backend1
 
     build: ./fastapi-crud/src
     command: |
@@ -15,20 +15,20 @@ services:
     networks:
       - crud-network
 
-  crud-frontend:
-    container_name: crud-frontend2
-    build:
-      context: ./AngularCRUD
-      dockerfile: Dockerfile
-    volumes:
-      - "./AngularCRUD:/app"
-      - "/app/node_modules"
-    ports:
-      - 4200:4200
-    depends_on:
-      - "crud-backend"
-    networks:
-      - crud-network
+  # crud-frontend:
+  #   container_name: crud-frontend2
+  #   build:
+  #     context: ./AngularCRUD
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - "./AngularCRUD:/app"
+  #     - "/app/node_modules"
+  #   ports:
+  #     - 4200:4200
+  #   depends_on:
+  #     - "crud-backend"
+  #   networks:
+  #     - crud-network
 
 networks:
   crud-network:

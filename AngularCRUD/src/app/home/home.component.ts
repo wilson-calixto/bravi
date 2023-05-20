@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
           var resultData = data.body;
           console.log(resultData);
           if (resultData) {
-            this.employeeList = resultData;
+            this.employeeList = resultData.Users;
           }
         }
       },

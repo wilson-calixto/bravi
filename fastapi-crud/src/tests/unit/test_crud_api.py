@@ -15,8 +15,8 @@ def test_root():
 def test_create_user():
     sample_payload = {
         "id": user_id,
-        "first_name": "PLACEHOLDER",
-        "last_name": "PLACEHOLDER",
+        "firstName": "PLACEHOLDER",
+        "lastName": "PLACEHOLDER",
         "address": "PLACEHOLDER",
         "activated": False,
         "createdAt": "2023-03-17T00:04:32",
@@ -26,8 +26,8 @@ def test_create_user():
     assert response.json() == {
         "Status": "Success",
         "User": {
-            "first_name": "PLACEHOLDER",
-            "last_name": "PLACEHOLDER",
+            "firstName": "PLACEHOLDER",
+            "lastName": "PLACEHOLDER",
             "activated": False,
             "createdAt": "2023-03-17T00:04:32",
             "id": user_id,
@@ -43,8 +43,8 @@ def test_get_user():
     assert response.json() == {
         "Status": "Success",
         "User": {
-            "first_name": "PLACEHOLDER",
-            "last_name": "PLACEHOLDER",
+            "firstName": "PLACEHOLDER",
+            "lastName": "PLACEHOLDER",
             "activated": False,
             "createdAt": "2023-03-17T00:04:32",
             "address": "PLACEHOLDER",
@@ -57,8 +57,8 @@ def test_get_user():
 def test_update_user():
     sample_payload = {
         "id": user_id,
-        "first_name": "PLACEHOLDER2",
-        "last_name": "PLACEHOLDER2",
+        "firstName": "PLACEHOLDER2",
+        "lastName": "PLACEHOLDER2",
         "address": "PLACEHOLDER2",
         "activated": True,
         "createdAt": "2023-03-17T00:04:32",
@@ -69,8 +69,8 @@ def test_update_user():
     assert response.json() == {
         "Status": "Success",
         "User": {
-            "first_name": "PLACEHOLDER2",
-            "last_name": "PLACEHOLDER2",
+            "firstName": "PLACEHOLDER2",
+            "lastName": "PLACEHOLDER2",
             "activated": True,
             "createdAt": "2023-03-17T00:04:32",
             "id": user_id,

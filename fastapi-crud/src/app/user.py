@@ -14,7 +14,7 @@ def get_users(
 
     users = (
         db.query(models.User)
-        .filter(models.User.first_name.contains(search))
+        .filter(models.User.firstName.contains(search))
         .limit(limit)
         .offset(skip)
         .all()

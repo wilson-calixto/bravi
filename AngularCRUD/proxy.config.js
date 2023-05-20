@@ -5,7 +5,7 @@ const proxy = [
     secure: false,
     changeOrigin: true,
     logLevel: "debug",
-    pathRewrite: { "^/api": "" },
+    // pathRewrite: { "^/api": "" },
   },
 ];
 module.exports = proxy;

@@ -3,10 +3,16 @@ from typing import List
 from pydantic import BaseModel
 
 
+        # "email": "1",
+        # "phone": "1"
+
+
 class UserBaseSchema(BaseModel):
-    first_name: str
-    last_name: str
+    firstName: str
+    lastName: str
     address: str | None = None
+    phone: str | None = None
+    email: str | None = None
     activated: bool = False
     createdAt: datetime | None = None
     updatedAt: datetime | None = None
