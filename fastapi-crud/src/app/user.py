@@ -28,7 +28,7 @@ def create_user(payload: schemas.UserBaseSchema, db: Session = Depends(get_db)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return {"Status": "Success", "User": new_user}
+    return {"Status": "Success", "User": new_user, "message": "User created successfully"}
 
 
 @router.patch("/{userId}", status_code=status.HTTP_202_ACCEPTED)

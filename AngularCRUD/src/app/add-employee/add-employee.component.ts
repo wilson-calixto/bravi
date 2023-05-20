@@ -30,10 +30,11 @@ export class AddEmployeeComponent implements OnInit {
     if (isValid) {
       this.httpProvider.saveEmployee(this.addEmployeeForm).subscribe(
         async (data) => {
+          console.log(data);
           if (data != null && data.body != null) {
             if (data != null && data.body != null) {
               var resultData = data.body;
-              if (resultData != null && resultData.isSuccess) {
+              if (resultData != null && resultData.Status) {
                 this.toastr.success(resultData.message);
                 setTimeout(() => {
                   this.router.navigate(['/Home']);
