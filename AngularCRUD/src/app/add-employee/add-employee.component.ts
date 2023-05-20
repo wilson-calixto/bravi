@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpProviderService } from '../service/http-provider.service';
+import { PassThrough } from 'stream';
 
 @Component({
   selector: 'app-add-employee',
@@ -23,6 +24,7 @@ export class AddEmployeeComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {}
 
   AddEmployee(isValid: any) {

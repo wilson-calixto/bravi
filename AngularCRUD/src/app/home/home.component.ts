@@ -96,16 +96,9 @@ export class HomeComponent implements OnInit {
   }
 
   deleteEmployeeConfirmation(employee: any) {
-    this.modalService
-      .open(MODALS['deleteModal'], {
-        ariaLabelledBy: 'modal-basic-title',
-      })
-      .result.then(
-        (result) => {
-          this.deleteEmployee(employee);
-        },
-        (reason) => {}
-      );
+    this.modalService.open(MODALS['deleteModal'], {
+      ariaLabelledBy: 'modal-basic-title',
+    });
   }
 
   deleteEmployee(employee: any) {
@@ -120,7 +113,9 @@ export class HomeComponent implements OnInit {
           }
         }
       },
-      (error: any) => {}
+      (error: any) => {
+        this.toastr.error('Operation error', error);
+      }
     );
   }
 }

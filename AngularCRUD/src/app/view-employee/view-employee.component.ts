@@ -22,16 +22,15 @@ export class ViewEmployeeComponent implements OnInit {
   }
 
   getEmployeeDetailById() {
-    this.httpProvider.getEmployeeDetailById(this.employeeId).subscribe(
-      (data: any) => {
+    this.httpProvider
+      .getEmployeeDetailById(this.employeeId)
+      .subscribe((data: any) => {
         if (data != null && data.User != null) {
           const resultData = data.User;
           if (resultData) {
             this.employeeDetail = resultData;
           }
         }
-      },
-      (error: any) => {}
-    );
+      });
   }
 }

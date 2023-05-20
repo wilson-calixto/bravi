@@ -45,7 +45,9 @@ export class EditEmployeeComponent implements OnInit {
           }
         }
       },
-      (error: any) => {}
+      (error: any) => {
+        this.toastr.error('Operation error', error);
+      }
     );
   }
 
