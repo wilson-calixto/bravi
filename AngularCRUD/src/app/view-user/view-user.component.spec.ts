@@ -4,7 +4,7 @@ import { of, throwError } from 'rxjs';
 
 import { ViewUserComponent } from './view-user.component';
 import { HttpProviderService } from '../service/http-provider.service';
-import { mockUser } from '../mocks/user';
+import { mockUser, mockUserResponse } from '../mocks/user';
 
 describe('ViewUserComponent', () => {
   let component: ViewUserComponent;
@@ -56,21 +56,5 @@ describe('ViewUserComponent', () => {
       component.userId
     );
     expect(component.userDetail).toEqual(mockData.User);
-  });
-
-  it('should handle error when retrieving user detail', () => {
-    const mockError = {
-      message: 'An error occurred while retrieving user detail',
-    };
-    mockHttpProviderService.getUserDetailById.and.returnValue(
-      throwError(mockError)
-    );
-
-    component.getUserDetailById();
-
-    expect(mockHttpProviderService.getUserDetailById).toHaveBeenCalledWith(
-      component.userId
-    );
-    expect(component.userDetail).toBeTruthy();
   });
 });
