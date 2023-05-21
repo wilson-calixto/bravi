@@ -1,8 +1,6 @@
 # AngularCRUD
 
-This project was generated with [Angular CLI] version 13.2.3.
-
-## Running unit tests
+## Running unit tests for Angular
 
 Run `npm run test` to execute the unit tests via [Karma].
 
@@ -12,7 +10,7 @@ Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The 
 
 # Developing and Testing an API with FastAPI and Pytest
 
-## Want to use this project?
+## Development server
 
 Build the images and run the containers:
 
@@ -20,8 +18,12 @@ Build the images and run the containers:
 $ docker-compose up -d --build
 ```
 
-Test out the following routes:
+## Running unit tests for python
 
-1. [http://localhost:3000/ping](http://localhost:3000/ping)
-1. [http://localhost:3000/docs](http://localhost:3000/docs)
-1. [http://localhost:3000/users](http://localhost:3000/users)
+Please install the dependencies via the requirements.txt file using
+
+cd fastapi-crud/
+
+pip install -r requirements.txt
+
+python -m pytest --cov=src ./src/app/tests/
