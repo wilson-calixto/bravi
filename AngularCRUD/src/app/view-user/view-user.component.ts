@@ -9,8 +9,8 @@ import { User, UserResponse } from '../models/User';
   styleUrls: ['./view-user.component.scss'],
 })
 export class ViewUserComponent implements OnInit {
-  employeeId!: number;
-  employeeDetail!: User;
+  userId!: number;
+  userDetail!: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,18 +18,18 @@ export class ViewUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.employeeId = this.route.snapshot.params['employeeId'];
-    this.getEmployeeDetailById();
+    this.userId = this.route.snapshot.params['userId'];
+    this.getUserDetailById();
   }
 
-  getEmployeeDetailById() {
+  getUserDetailById() {
     this.httpProvider
-      .getEmployeeDetailById(this.employeeId)
+      .getUserDetailById(this.userId)
       .subscribe((data: UserResponse) => {
         if (data != null && data.User != null) {
           const resultData = data.User;
           if (resultData) {
-            this.employeeDetail = resultData;
+            this.userDetail = resultData;
           }
         }
       });

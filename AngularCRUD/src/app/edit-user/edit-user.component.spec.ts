@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormsModule, NgForm } from '@angular/forms';
 import { of, throwError } from 'rxjs';
 
-import { EditEmployeeComponent, employeeForm } from './edit-user.component';
+import { EditEmployeeComponent, userForm } from './edit-user.component';
 import { HttpProviderService } from '../service/http-provider.service';
 
 describe('EditEmployeeComponent', () => {
@@ -23,7 +23,7 @@ describe('EditEmployeeComponent', () => {
 
     mockActivatedRoute = {
       snapshot: {
-        params: { employeeId: 1 },
+        params: { userId: 1 },
       },
     };
 
@@ -37,8 +37,8 @@ describe('EditEmployeeComponent', () => {
     };
 
     mockHttpProviderService = {
-      getEmployeeDetailById: jasmine
-        .createSpy('getEmployeeDetailById')
+      getUserDetailById: jasmine
+        .createSpy('getUserDetailById')
         .and.returnValue(of({ User: {} })),
       editUser: jasmine
         .createSpy('editUser')
@@ -68,7 +68,7 @@ describe('EditEmployeeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize the component and load employee details', () => {
+  it('should initialize the component and load user details', () => {
     const mockEmployee = {
       id: 1,
       firstName: 'John',
@@ -78,30 +78,28 @@ describe('EditEmployeeComponent', () => {
       phone: '555-1234',
     };
 
-    mockHttpProviderService.getEmployeeDetailById.and.returnValue(
+    mockHttpProviderService.getUserDetailById.and.returnValue(
       of({ User: mockEmployee })
     );
 
     component.ngOnInit();
 
-    expect(component.employeeId).toBe(1);
-    expect(mockHttpProviderService.getEmployeeDetailById).toHaveBeenCalledWith(
-      1
-    );
-    expect(component.editEmployeeForm).toEqual(mockEmployee);
+    expect(component.userId).toBe(1);
+    expect(mockHttpProviderService.getUserDetailById).toHaveBeenCalledWith(1);
+    expect(component.editUserForm).toEqual(mockEmployee);
   });
 
-  it('should edit an employee and show success toastr message', () => {
+  it('should edit an user and show success toastr message', () => {
     const mockValidForm = true;
     component.isSubmitted = false;
-    component.editEmployeeForm = new employeeForm();
-    component.editEmployeeForm.id = 1;
+    component.editUserForm = new userForm();
+    component.editUserForm.id = 1;
 
     component.EditUser(mockValidForm);
 
     expect(component.isSubmitted).toBe(true);
     expect(mockHttpProviderService.editUser).toHaveBeenCalledWith(
-      component.editEmployeeForm
+      component.editUserForm
     );
     expect(mockToastrService.success).toHaveBeenCalledWith(
       'Employee updated successfully'
@@ -109,7 +107,7 @@ describe('EditEmployeeComponent', () => {
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/Home']);
   });
 
-  it('should not edit an employee if the form is invalid', () => {
+  it('should not edit an user if the form is invalid', () => {
     const mockInvalidForm = false;
     component.isSubmitted = false;
 
@@ -121,12 +119,12 @@ describe('EditEmployeeComponent', () => {
     expect(mockRouter.navigate).not.toHaveBeenCalled();
   });
 
-  it('should handle error when editing an employee', () => {
+  it('should handle error when editing an user', () => {
     const mockValidForm = true;
-    const errorMessage = 'Error occurred while editing employee';
+    const errorMessage = 'Error occurred while editing user';
     component.isSubmitted = false;
-    component.editEmployeeForm = new employeeForm();
-    component.editEmployeeForm.id = 1;
+    component.editUserForm = new userForm();
+    component.editUserForm.id = 1;
 
     mockHttpProviderService.editUser.and.returnValue(
       throwError({ message: errorMessage })
@@ -136,7 +134,7 @@ describe('EditEmployeeComponent', () => {
 
     expect(component.isSubmitted).toBe(true);
     expect(mockHttpProviderService.editUser).toHaveBeenCalledWith(
-      component.editEmployeeForm
+      component.editUserForm
     );
     expect(mockToastrService.error).toHaveBeenCalledWith(errorMessage);
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/Home']);

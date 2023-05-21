@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormsModule, NgForm } from '@angular/forms';
 import { of, throwError } from 'rxjs';
 
-import { AddEmployeeComponent, employeeForm } from './add-employee.component';
+import { AddEmployeeComponent, userForm } from './add-user.component';
 import { HttpProviderService } from '../service/http-provider.service';
 
 describe('AddEmployeeComponent', () => {
@@ -29,8 +29,8 @@ describe('AddEmployeeComponent', () => {
     };
 
     mockHttpProviderService = {
-      postEmployee: jasmine
-        .createSpy('postEmployee')
+      postUser: jasmine
+        .createSpy('postUser')
         .and.returnValue(
           of({ status: true, message: 'Employee added successfully' })
         ),
@@ -56,16 +56,16 @@ describe('AddEmployeeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should add an employee and show success toastr message', () => {
+  it('should add an user and show success toastr message', () => {
     const mockValidForm = true;
     component.isSubmitted = false;
-    component.addEmployeeForm = new employeeForm();
+    component.addUserForm = new userForm();
 
     component.AddEmployee(mockValidForm);
 
     expect(component.isSubmitted).toBe(true);
-    expect(mockHttpProviderService.postEmployee).toHaveBeenCalledWith(
-      component.addEmployeeForm
+    expect(mockHttpProviderService.postUser).toHaveBeenCalledWith(
+      component.addUserForm
     );
     expect(mockToastrService.success).toHaveBeenCalledWith(
       'Employee added successfully'
@@ -73,33 +73,33 @@ describe('AddEmployeeComponent', () => {
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/Home']);
   });
 
-  it('should not add an employee if the form is invalid', () => {
+  it('should not add an user if the form is invalid', () => {
     const mockInvalidForm = false;
     component.isSubmitted = false;
 
     component.AddEmployee(mockInvalidForm);
 
     expect(component.isSubmitted).toBe(true);
-    expect(mockHttpProviderService.postEmployee).not.toHaveBeenCalled();
+    expect(mockHttpProviderService.postUser).not.toHaveBeenCalled();
     expect(mockToastrService.success).not.toHaveBeenCalled();
     expect(mockRouter.navigate).not.toHaveBeenCalled();
   });
 
-  it('should handle error when adding an employee', () => {
+  it('should handle error when adding an user', () => {
     const mockValidForm = true;
-    const errorMessage = 'Error occurred while adding employee';
+    const errorMessage = 'Error occurred while adding user';
     component.isSubmitted = false;
-    component.addEmployeeForm = new employeeForm();
+    component.addUserForm = new userForm();
 
-    mockHttpProviderService.postEmployee.and.returnValue(
+    mockHttpProviderService.postUser.and.returnValue(
       throwError({ message: errorMessage })
     );
 
     component.AddEmployee(mockValidForm);
 
     expect(component.isSubmitted).toBe(true);
-    expect(mockHttpProviderService.postEmployee).toHaveBeenCalledWith(
-      component.addEmployeeForm
+    expect(mockHttpProviderService.postUser).toHaveBeenCalledWith(
+      component.addUserForm
     );
     expect(mockToastrService.error).toHaveBeenCalledWith(errorMessage);
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/Home']);

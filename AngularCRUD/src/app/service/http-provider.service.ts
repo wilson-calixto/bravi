@@ -8,8 +8,8 @@ const apiUrl = '';
 
 const httpLink = {
   getAllEmployee: apiUrl + '/api/users',
-  deleteEmployeeById: apiUrl + '/api/users',
-  getEmployeeDetailById: apiUrl + '/api/users',
+  deleteUserById: apiUrl + '/api/users',
+  getUserDetailById: apiUrl + '/api/users',
   saveEmployee: apiUrl + '/api/users',
 };
 
@@ -19,13 +19,13 @@ const httpLink = {
 export class HttpProviderService {
   constructor(private httpClient: HttpClient) {}
 
-  public getAllEmployee() {
+  public getAllUsers() {
     return this.httpClient.get<UsersResponse>(httpLink.getAllEmployee);
   }
 
-  public getEmployeeDetailById(userId: number): Observable<UserResponse> {
+  public getUserDetailById(userId: number): Observable<UserResponse> {
     return this.httpClient.get<UserResponse>(
-      httpLink.getEmployeeDetailById + '/' + userId
+      httpLink.getUserDetailById + '/' + userId
     );
   }
   public editUser(user: User): Observable<BaseResponse> {
@@ -40,20 +40,20 @@ export class HttpProviderService {
     );
   }
 
-  public postEmployee(user: BaseUser): Observable<BaseResponse> {
+  public postUser(user: BaseUser): Observable<BaseResponse> {
     return this.httpClient.post<BaseResponse>(httpLink.saveEmployee, user);
   }
 
-  public deleteEmployeeById(userId: number): Observable<BaseResponse> {
+  public deleteUserById(userId: number): Observable<BaseResponse> {
     if (userId === null || userId === undefined) {
       throw new Error(
-        'Required parameter ids was null or undefined when calling deleteEmployeeById.'
+        'Required parameter ids was null or undefined when calling deleteUserById.'
       );
     }
 
     return this.httpClient.request<BaseResponse>(
       'delete',
-      httpLink.deleteEmployeeById + '/' + userId,
+      httpLink.deleteUserById + '/' + userId,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

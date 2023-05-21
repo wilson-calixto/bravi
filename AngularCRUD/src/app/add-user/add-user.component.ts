@@ -6,12 +6,12 @@ import { HttpProviderService } from '../service/http-provider.service';
 import { BaseResponse } from '../models/Api';
 
 @Component({
-  selector: 'app-add-employee',
-  templateUrl: './add-employee.component.html',
-  styleUrls: ['./add-employee.component.scss'],
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.scss'],
 })
 export class AddEmployeeComponent implements OnInit {
-  addEmployeeForm: UserForm = new UserForm();
+  addUserForm: UserForm = new UserForm();
 
   @ViewChild('UserForm')
   UserForm!: NgForm;
@@ -30,7 +30,7 @@ export class AddEmployeeComponent implements OnInit {
   AddEmployee(isValid: boolean) {
     this.isSubmitted = true;
     if (isValid) {
-      this.httpProvider.postEmployee(this.addEmployeeForm).subscribe(
+      this.httpProvider.postUser(this.addUserForm).subscribe(
         async (data: BaseResponse) => {
           if (data != null && data.status != null) {
             const resultData = data;

@@ -46,8 +46,8 @@ describe('HomeComponent', () => {
       getAllEmployee: jasmine
         .createSpy('getAllEmployee')
         .and.returnValue(of({ Users: [] })),
-      deleteEmployeeById: jasmine
-        .createSpy('deleteEmployeeById')
+      deleteUserById: jasmine
+        .createSpy('deleteUserById')
         .and.returnValue(
           of({ status: true, message: 'Employee deleted successfully' })
         ),
@@ -78,7 +78,7 @@ describe('HomeComponent', () => {
     const mockData = { Users: [] };
     mockHttpProviderService.getAllEmployee.and.returnValue(of(mockData));
 
-    component.getAllEmployee();
+    component.getAllUsers();
 
     expect(mockHttpProviderService.getAllEmployee).toHaveBeenCalled();
     expect(component.employeeList).toEqual(mockData.Users);
@@ -93,7 +93,7 @@ describe('HomeComponent', () => {
       throwError(mockError)
     );
 
-    component.getAllEmployee();
+    component.getAllUsers();
 
     expect(mockHttpProviderService.getAllEmployee).toHaveBeenCalled();
     expect(component.employeeList).toEqual([]);
@@ -105,17 +105,17 @@ describe('HomeComponent', () => {
     expect(mockRouter.navigate).toHaveBeenCalledWith(['AddEmployee']);
   });
 
-  it('should open delete confirmation modal and delete employee on confirmation', async () => {
+  it('should open delete confirmation modal and delete user on confirmation', async () => {
     mockModalService.open.and.returnValue({
       result: Promise.resolve('Ok click'),
     });
 
-    await component.deleteEmployeeConfirmation(mockEmployee);
+    await component.deleteUserConfirmation(mockEmployee);
 
     expect(mockModalService.open).toHaveBeenCalledWith(NgModalConfirm, {
       ariaLabelledBy: 'modal-basic-title',
     });
-    expect(mockHttpProviderService.deleteEmployeeById).toHaveBeenCalledWith(
+    expect(mockHttpProviderService.deleteUserById).toHaveBeenCalledWith(
       mockEmployee.id
     );
     expect(mockToastrService.success).toHaveBeenCalledWith(
@@ -124,36 +124,36 @@ describe('HomeComponent', () => {
     expect(component.getAllEmployee).toHaveBeenCalled();
   });
 
-  it('should open delete confirmation modal and not delete employee on cancellation', async () => {
+  it('should open delete confirmation modal and not delete user on cancellation', async () => {
     mockModalService.open.and.returnValue({
       result: Promise.reject('cancel click'),
     });
 
-    await component.deleteEmployeeConfirmation(mockEmployee);
+    await component.deleteUserConfirmation(mockEmployee);
 
     expect(mockModalService.open).toHaveBeenCalledWith(NgModalConfirm, {
       ariaLabelledBy: 'modal-basic-title',
     });
-    expect(mockHttpProviderService.deleteEmployeeById).not.toHaveBeenCalled();
+    expect(mockHttpProviderService.deleteUserById).not.toHaveBeenCalled();
     expect(mockToastrService.success).not.toHaveBeenCalled();
     expect(component.getAllEmployee).not.toHaveBeenCalled();
   });
 
-  it('should handle error when deleting employee', () => {
+  it('should handle error when deleting user', () => {
     const mockError = {
-      message: 'An error occurred while deleting the employee',
+      message: 'An error occurred while deleting the user',
     };
-    mockHttpProviderService.deleteEmployeeById.and.returnValue(
+    mockHttpProviderService.deleteUserById.and.returnValue(
       throwError(mockError)
     );
 
-    component.deleteEmployee(mockEmployee);
+    component.deleteUser(mockEmployee);
 
-    expect(mockHttpProviderService.deleteEmployeeById).toHaveBeenCalledWith(
+    expect(mockHttpProviderService.deleteUserById).toHaveBeenCalledWith(
       mockEmployee.id
     );
     expect(mockToastrService.error).toHaveBeenCalledWith(
-      'An error occurred while deleting the employee'
+      'An error occurred while deleting the user'
     );
     expect(component.getAllEmployee).not.toHaveBeenCalled();
   });

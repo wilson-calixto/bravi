@@ -42,7 +42,7 @@ describe('HttpProviderService', () => {
   it('should retrieve all employees', () => {
     const mockEmployees = [person1];
 
-    service.getAllEmployee().subscribe((employees) => {
+    service.getAllUsers().subscribe((employees) => {
       expect(employees).toEqual(mockEmployees);
     });
 
@@ -51,12 +51,12 @@ describe('HttpProviderService', () => {
     req.flush(mockEmployees);
   });
 
-  it('should retrieve employee detail by ID', () => {
+  it('should retrieve user detail by ID', () => {
     const userId = 1;
     const mockEmployee = { id: userId, name: 'John Doe' };
 
-    service.getEmployeeDetailById(userId).subscribe((employee) => {
-      expect(employee).toEqual(mockEmployee);
+    service.getUserDetailById(userId).subscribe((user) => {
+      expect(user).toEqual(mockEmployee);
     });
 
     const req = httpMock.expectOne(`/api/users/${userId}`);
@@ -64,7 +64,7 @@ describe('HttpProviderService', () => {
     req.flush(mockEmployee);
   });
 
-  it('should edit an employee', () => {
+  it('should edit an user', () => {
     const user = { id: 1, name: 'John Doe' };
 
     service.editUser(user).subscribe((response) => {
@@ -76,10 +76,10 @@ describe('HttpProviderService', () => {
     req.flush({});
   });
 
-  it('should create a new employee', () => {
+  it('should create a new user', () => {
     const user = { name: 'John Doe' };
 
-    service.postEmployee(user).subscribe((response) => {
+    service.postUser(user).subscribe((response) => {
       expect(response).toBeTruthy();
     });
 
@@ -88,10 +88,10 @@ describe('HttpProviderService', () => {
     req.flush({});
   });
 
-  it('should delete an employee by ID', () => {
+  it('should delete an user by ID', () => {
     const userId = 1;
 
-    service.deleteEmployeeById(userId).subscribe((response) => {
+    service.deleteUserById(userId).subscribe((response) => {
       expect(response).toBeTruthy();
     });
 

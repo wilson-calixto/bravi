@@ -64,11 +64,11 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllEmployee();
+    this.getAllUsers();
   }
 
-  async getAllEmployee() {
-    this.httpProvider.getAllEmployee().subscribe(
+  async getAllUsers() {
+    this.httpProvider.getAllUsers().subscribe(
       (data: UsersResponse) => {
         if (data != null && data.Users != null) {
           const resultData = data.Users;
@@ -93,24 +93,24 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['AddEmployee']);
   }
 
-  deleteEmployeeConfirmation(employee: User) {
+  deleteUserConfirmation(user: User) {
     this.modalService
       .open(NgModalConfirm, {
         ariaLabelledBy: 'modal-basic-title',
       })
       .result.then(() => {
-        this.deleteEmployee(employee);
+        this.deleteUser(user);
       });
   }
 
-  deleteEmployee(employee: User) {
-    this.httpProvider.deleteEmployeeById(employee.id).subscribe(
+  deleteUser(user: User) {
+    this.httpProvider.deleteUserById(user.id).subscribe(
       (data: BaseResponse) => {
         if (data != null) {
           const resultData = data;
           if (resultData != null && resultData.status) {
             this.toastr.success(resultData.message);
-            this.getAllEmployee();
+            this.getAllUsers();
           }
         }
       },

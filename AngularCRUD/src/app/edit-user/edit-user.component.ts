@@ -11,13 +11,13 @@ import { UserResponse } from '../models/User';
   styleUrls: ['./edit-user.component.scss'],
 })
 export class EditEmployeeComponent implements OnInit {
-  editEmployeeForm: employeeForm = new employeeForm();
+  editUserForm: userForm = new userForm();
 
-  @ViewChild('employeeForm')
-  employeeForm!: NgForm;
+  @ViewChild('userForm')
+  userForm!: NgForm;
 
   isSubmitted = false;
-  employeeId!: number;
+  userId!: number;
 
   constructor(
     private toastr: ToastrService,
@@ -27,22 +27,22 @@ export class EditEmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.employeeId = this.route.snapshot.params['employeeId'];
-    this.getEmployeeDetailById();
+    this.userId = this.route.snapshot.params['userId'];
+    this.getUserDetailById();
   }
 
-  getEmployeeDetailById() {
-    this.httpProvider.getEmployeeDetailById(this.employeeId).subscribe(
+  getUserDetailById() {
+    this.httpProvider.getUserDetailById(this.userId).subscribe(
       (data: UserResponse) => {
         if (data != null && data.User != null) {
           const resultData = data.User;
           if (resultData) {
-            this.editEmployeeForm.id = resultData.id;
-            this.editEmployeeForm.firstName = resultData.firstName;
-            this.editEmployeeForm.lastName = resultData.lastName;
-            this.editEmployeeForm.email = resultData.email;
-            this.editEmployeeForm.address = resultData.address;
-            this.editEmployeeForm.phone = resultData.phone;
+            this.editUserForm.id = resultData.id;
+            this.editUserForm.firstName = resultData.firstName;
+            this.editUserForm.lastName = resultData.lastName;
+            this.editUserForm.email = resultData.email;
+            this.editUserForm.address = resultData.address;
+            this.editUserForm.phone = resultData.phone;
           }
         }
       },
@@ -55,7 +55,7 @@ export class EditEmployeeComponent implements OnInit {
   EditUser(isValid: boolean) {
     this.isSubmitted = true;
     if (isValid) {
-      this.httpProvider.editUser(this.editEmployeeForm).subscribe(
+      this.httpProvider.editUser(this.editUserForm).subscribe(
         async (data) => {
           if (data != null) {
             const resultData = data;
@@ -78,7 +78,7 @@ export class EditEmployeeComponent implements OnInit {
   }
 }
 
-export class employeeForm {
+export class userForm {
   id = 0;
   firstName = '';
   lastName = '';

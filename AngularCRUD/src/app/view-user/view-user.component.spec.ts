@@ -15,14 +15,14 @@ describe('ViewUserComponent', () => {
     mockActivatedRoute = {
       snapshot: {
         params: {
-          employeeId: 1,
+          userId: 1,
         },
       },
     };
 
     mockHttpProviderService = {
-      getEmployeeDetailById: jasmine
-        .createSpy('getEmployeeDetailById')
+      getUserDetailById: jasmine
+        .createSpy('getUserDetailById')
         .and.returnValue(of({ User: {} })),
     };
 
@@ -45,31 +45,31 @@ describe('ViewUserComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should retrieve employee detail by id', () => {
+  it('should retrieve user detail by id', () => {
     const mockData = { User: {} };
-    mockHttpProviderService.getEmployeeDetailById.and.returnValue(of(mockData));
+    mockHttpProviderService.getUserDetailById.and.returnValue(of(mockData));
 
-    component.getEmployeeDetailById();
+    component.getUserDetailById();
 
-    expect(mockHttpProviderService.getEmployeeDetailById).toHaveBeenCalledWith(
-      component.employeeId
+    expect(mockHttpProviderService.getUserDetailById).toHaveBeenCalledWith(
+      component.userId
     );
-    expect(component.employeeDetail).toEqual(mockData.User);
+    expect(component.userDetail).toEqual(mockData.User);
   });
 
-  it('should handle error when retrieving employee detail', () => {
+  it('should handle error when retrieving user detail', () => {
     const mockError = {
-      message: 'An error occurred while retrieving employee detail',
+      message: 'An error occurred while retrieving user detail',
     };
-    mockHttpProviderService.getEmployeeDetailById.and.returnValue(
+    mockHttpProviderService.getUserDetailById.and.returnValue(
       throwError(mockError)
     );
 
-    component.getEmployeeDetailById();
+    component.getUserDetailById();
 
-    expect(mockHttpProviderService.getEmployeeDetailById).toHaveBeenCalledWith(
-      component.employeeId
+    expect(mockHttpProviderService.getUserDetailById).toHaveBeenCalledWith(
+      component.userId
     );
-    expect(component.employeeDetail).toBeTruthy();
+    expect(component.userDetail).toBeTruthy();
   });
 });
