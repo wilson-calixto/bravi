@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormsModule, NgForm } from '@angular/forms';
 import { of, throwError } from 'rxjs';
 
-import { EditEmployeeComponent, employeeForm } from './edit-employee.component';
+import { EditEmployeeComponent, employeeForm } from './edit-user.component';
 import { HttpProviderService } from '../service/http-provider.service';
 
 describe('EditEmployeeComponent', () => {
@@ -40,8 +40,8 @@ describe('EditEmployeeComponent', () => {
       getEmployeeDetailById: jasmine
         .createSpy('getEmployeeDetailById')
         .and.returnValue(of({ User: {} })),
-      editEmployee: jasmine
-        .createSpy('editEmployee')
+      editUser: jasmine
+        .createSpy('editUser')
         .and.returnValue(
           of({ status: true, message: 'Employee updated successfully' })
         ),
@@ -97,10 +97,10 @@ describe('EditEmployeeComponent', () => {
     component.editEmployeeForm = new employeeForm();
     component.editEmployeeForm.id = 1;
 
-    component.EditEmployee(mockValidForm);
+    component.EditUser(mockValidForm);
 
     expect(component.isSubmitted).toBe(true);
-    expect(mockHttpProviderService.editEmployee).toHaveBeenCalledWith(
+    expect(mockHttpProviderService.editUser).toHaveBeenCalledWith(
       component.editEmployeeForm
     );
     expect(mockToastrService.success).toHaveBeenCalledWith(
@@ -113,10 +113,10 @@ describe('EditEmployeeComponent', () => {
     const mockInvalidForm = false;
     component.isSubmitted = false;
 
-    component.EditEmployee({});
+    component.EditUser({});
 
     expect(component.isSubmitted).toBe(true);
-    expect(mockHttpProviderService.editEmployee).not.toHaveBeenCalled();
+    expect(mockHttpProviderService.editUser).not.toHaveBeenCalled();
     expect(mockToastrService.success).not.toHaveBeenCalled();
     expect(mockRouter.navigate).not.toHaveBeenCalled();
   });
@@ -128,14 +128,14 @@ describe('EditEmployeeComponent', () => {
     component.editEmployeeForm = new employeeForm();
     component.editEmployeeForm.id = 1;
 
-    mockHttpProviderService.editEmployee.and.returnValue(
+    mockHttpProviderService.editUser.and.returnValue(
       throwError({ message: errorMessage })
     );
 
-    component.EditEmployee(mockValidForm);
+    component.EditUser(mockValidForm);
 
     expect(component.isSubmitted).toBe(true);
-    expect(mockHttpProviderService.editEmployee).toHaveBeenCalledWith(
+    expect(mockHttpProviderService.editUser).toHaveBeenCalledWith(
       component.editEmployeeForm
     );
     expect(mockToastrService.error).toHaveBeenCalledWith(errorMessage);

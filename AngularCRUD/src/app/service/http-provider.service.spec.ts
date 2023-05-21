@@ -67,7 +67,7 @@ describe('HttpProviderService', () => {
   it('should edit an employee', () => {
     const user = { id: 1, name: 'John Doe' };
 
-    service.editEmployee(user).subscribe((response) => {
+    service.editUser(user).subscribe((response) => {
       expect(response).toBeTruthy();
     });
 

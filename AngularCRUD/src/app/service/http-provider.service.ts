@@ -28,10 +28,10 @@ export class HttpProviderService {
       httpLink.getEmployeeDetailById + '/' + userId
     );
   }
-  public editEmployee(user: User): Observable<BaseResponse> {
+  public editUser(user: User): Observable<BaseResponse> {
     if (user.id === null || user.id === undefined) {
       throw new Error(
-        'Required parameter ids was null or undefined when calling editEmployee.'
+        'Required parameter ids was null or undefined when calling editUser.'
       );
     }
     return this.httpClient.patch<BaseResponse>(

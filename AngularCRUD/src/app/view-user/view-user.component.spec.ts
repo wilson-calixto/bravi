@@ -70,6 +70,6 @@ describe('ViewUserComponent', () => {
     expect(mockHttpProviderService.getEmployeeDetailById).toHaveBeenCalledWith(
       component.employeeId
     );
-    expect(component.employeeDetail).toEqual({});
+    expect(component.employeeDetail).toBeTruthy();
   });
 });

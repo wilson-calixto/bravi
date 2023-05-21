@@ -3,12 +3,12 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpProviderService } from '../service/http-provider.service';
-import { User, UserResponse } from '../models/User';
+import { UserResponse } from '../models/User';
 
 @Component({
-  selector: 'app-edit-employee',
-  templateUrl: './edit-employee.component.html',
-  styleUrls: ['./edit-employee.component.scss'],
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.scss'],
 })
 export class EditEmployeeComponent implements OnInit {
   editEmployeeForm: employeeForm = new employeeForm();
@@ -52,10 +52,10 @@ export class EditEmployeeComponent implements OnInit {
     );
   }
 
-  EditEmployee(isValid: boolean) {
+  EditUser(isValid: boolean) {
     this.isSubmitted = true;
     if (isValid) {
-      this.httpProvider.editEmployee(this.editEmployeeForm).subscribe(
+      this.httpProvider.editUser(this.editEmployeeForm).subscribe(
         async (data) => {
           if (data != null) {
             const resultData = data;
