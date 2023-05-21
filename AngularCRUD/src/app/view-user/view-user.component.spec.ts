@@ -2,12 +2,12 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
-import { ViewEmployeeComponent } from './view-employee.component';
+import { ViewUserComponent } from './view-user.component';
 import { HttpProviderService } from '../service/http-provider.service';
 
-describe('ViewEmployeeComponent', () => {
-  let component: ViewEmployeeComponent;
-  let fixture: ComponentFixture<ViewEmployeeComponent>;
+describe('ViewUserComponent', () => {
+  let component: ViewUserComponent;
+  let fixture: ComponentFixture<ViewUserComponent>;
   let mockActivatedRoute: any;
   let mockHttpProviderService: any;
 
@@ -27,7 +27,7 @@ describe('ViewEmployeeComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [ViewEmployeeComponent],
+      declarations: [ViewUserComponent],
       providers: [
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: HttpProviderService, useValue: mockHttpProviderService },
@@ -36,7 +36,7 @@ describe('ViewEmployeeComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewEmployeeComponent);
+    fixture = TestBed.createComponent(ViewUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

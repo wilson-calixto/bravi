@@ -4,11 +4,11 @@ import { HttpProviderService } from '../service/http-provider.service';
 import { User, UserResponse } from '../models/User';
 
 @Component({
-  selector: 'app-view-employee',
-  templateUrl: './view-employee.component.html',
-  styleUrls: ['./view-employee.component.scss'],
+  selector: 'app-view-user',
+  templateUrl: './view-user.component.html',
+  styleUrls: ['./view-user.component.scss'],
 })
-export class ViewEmployeeComponent implements OnInit {
+export class ViewUserComponent implements OnInit {
   employeeId!: number;
   employeeDetail!: User;
 

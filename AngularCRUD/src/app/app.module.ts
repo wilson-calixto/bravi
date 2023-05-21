@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { ViewEmployeeComponent } from './view-employee/view-employee.component';
+import { ViewUserComponent } from './view-user/view-user.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,7 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     HomeComponent,
-    ViewEmployeeComponent,
+    ViewUserComponent,
     AddEmployeeComponent,
     EditEmployeeComponent,
   ],
