@@ -1,12 +1,10 @@
 import { HttpProviderService } from './http-provider.service';
-import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { mockUser, mockUserResponse, mockUsersResponse } from '../mocks/user';
+import { mockUser, mockUsersResponse } from '../mocks/user';
 
 describe('HttpProviderService', () => {
   let httpMock: HttpTestingController;
