@@ -6,7 +6,7 @@ import { User, UserResponse, UsersResponse, BaseUser } from '../models/User';
 
 const apiUrl = '';
 
-const httpLink = {
+export const httpLink = {
   getAllUser: apiUrl + '/api/users',
   deleteUserById: apiUrl + '/api/users',
   getUserDetailById: apiUrl + '/api/users',

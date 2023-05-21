@@ -6,25 +6,12 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { mockUser, mockUserResponse, mockUsersResponse } from '../mocks/user';
 
 describe('HttpProviderService', () => {
-  let httpClientSpy: jasmine.SpyObj<HttpClient>;
   let httpMock: HttpTestingController;
   let service: HttpProviderService;
 
-  const person1 = {
-    address: '432432 rerwer3',
-    firstName: '4444',
-    id: 17,
-    email: 'a@a.com',
-    createdAt: '2023-05-20T13:49:22',
-    phone: '9298949399',
-    lastName: 'calixto',
-    activated: false,
-    updatedAt: null,
-  };
-
-  const expectedResponse = [person1];
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -40,46 +27,37 @@ describe('HttpProviderService', () => {
   });
 
   it('should retrieve all users', () => {
-    const mockUsers = [person1];
-
     service.getAllUsers().subscribe((users) => {
-      expect(users).toEqual(mockUsers);
+      expect(users).toEqual(mockUsersResponse);
     });
 
     const req = httpMock.expectOne('/api/users');
     expect(req.request.method).toBe('GET');
-    req.flush(mockUsers);
+    req.flush(mockUsersResponse);
   });
 
   it('should retrieve user detail by ID', () => {
-    const userId = 1;
-    const mockUser = { id: userId, name: 'John Doe' };
-
-    service.getUserDetailById(userId).subscribe((user) => {
-      expect(user).toEqual(mockUser);
+    service.getUserDetailById(mockUser.id).subscribe((user) => {
+      expect(user).toEqual(mockUserResponse);
     });
 
-    const req = httpMock.expectOne(`/api/users/${userId}`);
+    const req = httpMock.expectOne(`/api/users/${mockUser.id}`);
     expect(req.request.method).toBe('GET');
     req.flush(mockUser);
   });
 
   it('should edit an user', () => {
-    const user = { id: 1, name: 'John Doe' };
-
-    service.editUser(user).subscribe((response) => {
+    service.editUser(mockUser).subscribe((response) => {
       expect(response).toBeTruthy();
     });
 
-    const req = httpMock.expectOne(`/api/users/${user.id}`);
+    const req = httpMock.expectOne(`/api/users/${mockUser.id}`);
     expect(req.request.method).toBe('PATCH');
     req.flush({});
   });
 
   it('should create a new user', () => {
-    const user = { name: 'John Doe' };
-
-    service.postUser(user).subscribe((response) => {
+    service.postUser(mockUser).subscribe((response) => {
       expect(response).toBeTruthy();
     });
 
