@@ -1,10 +1,10 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 
 import { ViewUserComponent } from './view-user.component';
 import { HttpProviderService } from '../service/http-provider.service';
-import { mockUser, mockUserResponse } from '../mocks/user';
+import { mockUser } from '../mocks/user';
 
 describe('ViewUserComponent', () => {
   let component: ViewUserComponent;
