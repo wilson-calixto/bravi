@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseResponse } from '../models/Api';
-import { User, UserResponse, UsersResponse, baseUser } from '../models/User';
+import { User, UserResponse, UsersResponse, BaseUser } from '../models/User';
 
 const apiUrl = '';
 
@@ -40,7 +40,7 @@ export class HttpProviderService {
     );
   }
 
-  public postEmployee(user: baseUser): Observable<BaseResponse> {
+  public postEmployee(user: BaseUser): Observable<BaseResponse> {
     return this.httpClient.post<BaseResponse>(httpLink.saveEmployee, user);
   }
 

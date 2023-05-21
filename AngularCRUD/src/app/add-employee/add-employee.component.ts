@@ -11,10 +11,10 @@ import { BaseResponse } from '../models/Api';
   styleUrls: ['./add-employee.component.scss'],
 })
 export class AddEmployeeComponent implements OnInit {
-  addEmployeeForm: employeeForm = new employeeForm();
+  addEmployeeForm: UserForm = new UserForm();
 
-  @ViewChild('employeeForm')
-  employeeForm!: NgForm;
+  @ViewChild('UserForm')
+  UserForm!: NgForm;
 
   isSubmitted = false;
 
@@ -53,7 +53,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 }
 
-export class employeeForm {
+export class UserForm {
   firstName = '';
   lastName = '';
   email = '';

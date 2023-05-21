@@ -1,4 +1,4 @@
-export interface baseUser {
+export interface BaseUser {
   firstName: string;
   lastName: string;
   email: string;
@@ -6,7 +6,7 @@ export interface baseUser {
   phone: string;
   createdAt?: string;
 }
-export interface User extends baseUser {
+export interface User extends BaseUser {
   id: number;
 }
 

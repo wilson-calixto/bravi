@@ -47,10 +47,6 @@ export class NgModalConfirm {
   constructor(public modal: NgbActiveModal) {}
 }
 
-const MODALS: { [name: string]: Type<any> } = {
-  deleteModal: NgModalConfirm,
-};
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -81,7 +77,7 @@ export class HomeComponent implements OnInit {
           }
         }
       },
-      (error: any) => {
+      (error) => {
         if (error) {
           if (error.status == 404) {
             if (error.error && error.error.message) {
@@ -99,7 +95,7 @@ export class HomeComponent implements OnInit {
 
   deleteEmployeeConfirmation(employee: User) {
     this.modalService
-      .open(MODALS['deleteModal'], {
+      .open(NgModalConfirm, {
         ariaLabelledBy: 'modal-basic-title',
       })
       .result.then(() => {

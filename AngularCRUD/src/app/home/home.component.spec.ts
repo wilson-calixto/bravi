@@ -1,11 +1,12 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { of, throwError } from 'rxjs';
 
 import { HomeComponent, NgModalConfirm } from './home.component';
 import { HttpProviderService } from '../service/http-provider.service';
+import { User } from '../models/User';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -14,6 +15,16 @@ describe('HomeComponent', () => {
   let mockModalService: any;
   let mockToastrService: any;
   let mockHttpProviderService: any;
+
+  const mockEmployee: User = {
+    id: 1,
+    firstName: 'fsdfdsferer23123',
+    lastName: '54435435',
+    email: '4rwetrwetretre@dsd.com',
+    address: '432432 rerwer3',
+    phone: '8989888898',
+    createdAt: '1684338987602',
+  };
 
   beforeEach(async () => {
     mockRouter = {
@@ -95,7 +106,6 @@ describe('HomeComponent', () => {
   });
 
   it('should open delete confirmation modal and delete employee on confirmation', async () => {
-    const mockEmployee = { id: 1 };
     mockModalService.open.and.returnValue({
       result: Promise.resolve('Ok click'),
     });
@@ -115,7 +125,6 @@ describe('HomeComponent', () => {
   });
 
   it('should open delete confirmation modal and not delete employee on cancellation', async () => {
-    const mockEmployee = { id: 1 };
     mockModalService.open.and.returnValue({
       result: Promise.reject('cancel click'),
     });
@@ -131,7 +140,6 @@ describe('HomeComponent', () => {
   });
 
   it('should handle error when deleting employee', () => {
-    const mockEmployee = { id: 1 };
     const mockError = {
       message: 'An error occurred while deleting the employee',
     };
