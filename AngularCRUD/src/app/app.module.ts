@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ViewUserComponent } from './view-user/view-user.component';
-import { AddEmployeeComponent } from './add-user/add-user.component';
-import { EditEmployeeComponent } from './edit-user/edit-user.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -18,8 +18,8 @@ import { ToastrModule } from 'ngx-toastr';
     AppComponent,
     HomeComponent,
     ViewUserComponent,
-    AddEmployeeComponent,
-    EditEmployeeComponent,
+    AddUserComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@ describe('HomeComponent', () => {
   let mockToastrService: any;
   let mockHttpProviderService: any;
 
-  const mockEmployee: User = {
+  const mockUser: User = {
     id: 1,
     firstName: 'fsdfdsferer23123',
     lastName: '54435435',
@@ -43,13 +43,13 @@ describe('HomeComponent', () => {
     };
 
     mockHttpProviderService = {
-      getAllEmployee: jasmine
-        .createSpy('getAllEmployee')
+      getAllUser: jasmine
+        .createSpy('getAllUser')
         .and.returnValue(of({ Users: [] })),
       deleteUserById: jasmine
         .createSpy('deleteUserById')
         .and.returnValue(
-          of({ status: true, message: 'Employee deleted successfully' })
+          of({ status: true, message: 'user deleted successfully' })
         ),
     };
 
@@ -74,35 +74,33 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should retrieve all employees', () => {
+  it('should retrieve all users', () => {
     const mockData = { Users: [] };
-    mockHttpProviderService.getAllEmployee.and.returnValue(of(mockData));
+    mockHttpProviderService.getAllUser.and.returnValue(of(mockData));
 
     component.getAllUsers();
 
-    expect(mockHttpProviderService.getAllEmployee).toHaveBeenCalled();
-    expect(component.employeeList).toEqual(mockData.Users);
+    expect(mockHttpProviderService.getAllUser).toHaveBeenCalled();
+    expect(component.userList).toEqual(mockData.Users);
   });
 
-  it('should handle error when retrieving employees', () => {
+  it('should handle error when retrieving users', () => {
     const mockError = {
       status: 404,
-      error: { message: 'Employees not found' },
+      error: { message: 'Users not found' },
     };
-    mockHttpProviderService.getAllEmployee.and.returnValue(
-      throwError(mockError)
-    );
+    mockHttpProviderService.getAllUser.and.returnValue(throwError(mockError));
 
     component.getAllUsers();
 
-    expect(mockHttpProviderService.getAllEmployee).toHaveBeenCalled();
-    expect(component.employeeList).toEqual([]);
+    expect(mockHttpProviderService.getAllUser).toHaveBeenCalled();
+    expect(component.userList).toEqual([]);
   });
 
-  it('should navigate to AddEmployee page', () => {
-    component.AddEmployee();
+  it('should navigate to AddUser page', () => {
+    component.AddUser();
 
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['AddEmployee']);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['AddUser']);
   });
 
   it('should open delete confirmation modal and delete user on confirmation', async () => {
@@ -110,18 +108,18 @@ describe('HomeComponent', () => {
       result: Promise.resolve('Ok click'),
     });
 
-    await component.deleteUserConfirmation(mockEmployee);
+    await component.deleteUserConfirmation(mockUser);
 
     expect(mockModalService.open).toHaveBeenCalledWith(NgModalConfirm, {
       ariaLabelledBy: 'modal-basic-title',
     });
     expect(mockHttpProviderService.deleteUserById).toHaveBeenCalledWith(
-      mockEmployee.id
+      mockUser.id
     );
     expect(mockToastrService.success).toHaveBeenCalledWith(
-      'Employee deleted successfully'
+      'user deleted successfully'
     );
-    expect(component.getAllEmployee).toHaveBeenCalled();
+    expect(component.getAllUser).toHaveBeenCalled();
   });
 
   it('should open delete confirmation modal and not delete user on cancellation', async () => {
@@ -129,14 +127,14 @@ describe('HomeComponent', () => {
       result: Promise.reject('cancel click'),
     });
 
-    await component.deleteUserConfirmation(mockEmployee);
+    await component.deleteUserConfirmation(mockUser);
 
     expect(mockModalService.open).toHaveBeenCalledWith(NgModalConfirm, {
       ariaLabelledBy: 'modal-basic-title',
     });
     expect(mockHttpProviderService.deleteUserById).not.toHaveBeenCalled();
     expect(mockToastrService.success).not.toHaveBeenCalled();
-    expect(component.getAllEmployee).not.toHaveBeenCalled();
+    expect(component.getAllUser).not.toHaveBeenCalled();
   });
 
   it('should handle error when deleting user', () => {
@@ -147,14 +145,14 @@ describe('HomeComponent', () => {
       throwError(mockError)
     );
 
-    component.deleteUser(mockEmployee);
+    component.deleteUser(mockUser);
 
     expect(mockHttpProviderService.deleteUserById).toHaveBeenCalledWith(
-      mockEmployee.id
+      mockUser.id
     );
     expect(mockToastrService.error).toHaveBeenCalledWith(
       'An error occurred while deleting the user'
     );
-    expect(component.getAllEmployee).not.toHaveBeenCalled();
+    expect(component.getAllUser).not.toHaveBeenCalled();
   });
 });

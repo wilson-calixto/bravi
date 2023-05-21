@@ -7,7 +7,7 @@
             <h4><b>Wilson Calixto Challenge</b></h4>
           </div>
           <div class="col-sm-6">
-            <button class="btn btn-success" (click)="AddEmployee()">
+            <button class="btn btn-success" (click)="AddUser()">
               <i class="fas fa-plus-circle"></i><span> ADD</span>
             </button>
           </div>
@@ -30,7 +30,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of employeeList" class="center-align">
+          <tr *ngFor="let user of userList" class="center-align">
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
             <td>{{ user.email }}</td>
@@ -53,9 +53,7 @@
             </td>
           </tr>
           <tr>
-            <td *ngIf="employeeList.length == 0" colspan="6">
-              No Employee Found
-            </td>
+            <td *ngIf="userList.length == 0" colspan="6">No user Found</td>
           </tr>
         </tbody>
       </table>

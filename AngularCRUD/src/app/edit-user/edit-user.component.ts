@@ -10,7 +10,7 @@ import { UserResponse } from '../models/User';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss'],
 })
-export class EditEmployeeComponent implements OnInit {
+export class EditUserComponent implements OnInit {
   editUserForm: userForm = new userForm();
 
   @ViewChild('userForm')

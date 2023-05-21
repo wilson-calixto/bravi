@@ -4,19 +4,19 @@ import { ToastrService } from 'ngx-toastr';
 import { FormsModule, NgForm } from '@angular/forms';
 import { of, throwError } from 'rxjs';
 
-import { AddEmployeeComponent, userForm } from './add-user.component';
+import { AddUserComponent, userForm } from './add-user.component';
 import { HttpProviderService } from '../service/http-provider.service';
 
-describe('AddEmployeeComponent', () => {
-  let component: AddEmployeeComponent;
-  let fixture: ComponentFixture<AddEmployeeComponent>;
+describe('AddUserComponent', () => {
+  let component: AddUserComponent;
+  let fixture: ComponentFixture<AddUserComponent>;
   let mockRouter: any;
   let mockToastrService: any;
   let mockHttpProviderService: any;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddEmployeeComponent],
+      declarations: [AddUserComponent],
       imports: [FormsModule],
     }).compileComponents();
     mockRouter = {
@@ -32,12 +32,12 @@ describe('AddEmployeeComponent', () => {
       postUser: jasmine
         .createSpy('postUser')
         .and.returnValue(
-          of({ status: true, message: 'Employee added successfully' })
+          of({ status: true, message: 'user added successfully' })
         ),
     };
 
     await TestBed.configureTestingModule({
-      declarations: [AddEmployeeComponent],
+      declarations: [AddUserComponent],
       providers: [
         { provide: Router, useValue: mockRouter },
         { provide: ToastrService, useValue: mockToastrService },
@@ -47,7 +47,7 @@ describe('AddEmployeeComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddEmployeeComponent);
+    fixture = TestBed.createComponent(AddUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -61,14 +61,14 @@ describe('AddEmployeeComponent', () => {
     component.isSubmitted = false;
     component.addUserForm = new userForm();
 
-    component.AddEmployee(mockValidForm);
+    component.AddUser(mockValidForm);
 
     expect(component.isSubmitted).toBe(true);
     expect(mockHttpProviderService.postUser).toHaveBeenCalledWith(
       component.addUserForm
     );
     expect(mockToastrService.success).toHaveBeenCalledWith(
-      'Employee added successfully'
+      'user added successfully'
     );
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/Home']);
   });
@@ -77,7 +77,7 @@ describe('AddEmployeeComponent', () => {
     const mockInvalidForm = false;
     component.isSubmitted = false;
 
-    component.AddEmployee(mockInvalidForm);
+    component.AddUser(mockInvalidForm);
 
     expect(component.isSubmitted).toBe(true);
     expect(mockHttpProviderService.postUser).not.toHaveBeenCalled();
@@ -95,7 +95,7 @@ describe('AddEmployeeComponent', () => {
       throwError({ message: errorMessage })
     );
 
-    component.AddEmployee(mockValidForm);
+    component.AddUser(mockValidForm);
 
     expect(component.isSubmitted).toBe(true);
     expect(mockHttpProviderService.postUser).toHaveBeenCalledWith(

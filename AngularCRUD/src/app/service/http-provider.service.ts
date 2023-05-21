@@ -7,10 +7,10 @@ import { User, UserResponse, UsersResponse, BaseUser } from '../models/User';
 const apiUrl = '';
 
 const httpLink = {
-  getAllEmployee: apiUrl + '/api/users',
+  getAllUser: apiUrl + '/api/users',
   deleteUserById: apiUrl + '/api/users',
   getUserDetailById: apiUrl + '/api/users',
-  saveEmployee: apiUrl + '/api/users',
+  saveUser: apiUrl + '/api/users',
 };
 
 @Injectable({
@@ -20,7 +20,7 @@ export class HttpProviderService {
   constructor(private httpClient: HttpClient) {}
 
   public getAllUsers() {
-    return this.httpClient.get<UsersResponse>(httpLink.getAllEmployee);
+    return this.httpClient.get<UsersResponse>(httpLink.getAllUser);
   }
 
   public getUserDetailById(userId: number): Observable<UserResponse> {
@@ -35,13 +35,13 @@ export class HttpProviderService {
       );
     }
     return this.httpClient.patch<BaseResponse>(
-      httpLink.saveEmployee + '/' + user.id,
+      httpLink.saveUser + '/' + user.id,
       user
     );
   }
 
   public postUser(user: BaseUser): Observable<BaseResponse> {
-    return this.httpClient.post<BaseResponse>(httpLink.saveEmployee, user);
+    return this.httpClient.post<BaseResponse>(httpLink.saveUser, user);
   }
 
   public deleteUserById(userId: number): Observable<BaseResponse> {

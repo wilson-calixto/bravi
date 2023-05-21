@@ -10,7 +10,7 @@ import { BaseResponse } from '../models/Api';
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.scss'],
 })
-export class AddEmployeeComponent implements OnInit {
+export class AddUserComponent implements OnInit {
   addUserForm: UserForm = new UserForm();
 
   @ViewChild('UserForm')
@@ -27,7 +27,7 @@ export class AddEmployeeComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {}
 
-  AddEmployee(isValid: boolean) {
+  AddUser(isValid: boolean) {
     this.isSubmitted = true;
     if (isValid) {
       this.httpProvider.postUser(this.addUserForm).subscribe(

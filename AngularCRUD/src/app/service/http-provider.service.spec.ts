@@ -39,29 +39,29 @@ describe('HttpProviderService', () => {
     httpMock.verify();
   });
 
-  it('should retrieve all employees', () => {
-    const mockEmployees = [person1];
+  it('should retrieve all users', () => {
+    const mockUsers = [person1];
 
-    service.getAllUsers().subscribe((employees) => {
-      expect(employees).toEqual(mockEmployees);
+    service.getAllUsers().subscribe((users) => {
+      expect(users).toEqual(mockUsers);
     });
 
     const req = httpMock.expectOne('/api/users');
     expect(req.request.method).toBe('GET');
-    req.flush(mockEmployees);
+    req.flush(mockUsers);
   });
 
   it('should retrieve user detail by ID', () => {
     const userId = 1;
-    const mockEmployee = { id: userId, name: 'John Doe' };
+    const mockUser = { id: userId, name: 'John Doe' };
 
     service.getUserDetailById(userId).subscribe((user) => {
-      expect(user).toEqual(mockEmployee);
+      expect(user).toEqual(mockUser);
     });
 
     const req = httpMock.expectOne(`/api/users/${userId}`);
     expect(req.request.method).toBe('GET');
-    req.flush(mockEmployee);
+    req.flush(mockUser);
   });
 
   it('should edit an user', () => {

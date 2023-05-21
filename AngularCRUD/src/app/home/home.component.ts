@@ -54,7 +54,7 @@ export class NgModalConfirm {
 })
 export class HomeComponent implements OnInit {
   closeResult = '';
-  employeeList: User[] = [];
+  userList: User[] = [];
 
   constructor(
     private router: Router,
@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
         if (data != null && data.Users != null) {
           const resultData = data.Users;
           if (resultData) {
-            this.employeeList = resultData;
+            this.userList = resultData;
           }
         }
       },
@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
         if (error) {
           if (error.status == 404) {
             if (error.error && error.error.message) {
-              this.employeeList = [];
+              this.userList = [];
             }
           }
         }
@@ -89,8 +89,8 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  AddEmployee() {
-    this.router.navigate(['AddEmployee']);
+  AddUser() {
+    this.router.navigate(['AddUser']);
   }
 
   deleteUserConfirmation(user: User) {

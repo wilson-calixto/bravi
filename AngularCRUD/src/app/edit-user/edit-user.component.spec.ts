@@ -4,12 +4,12 @@ import { ToastrService } from 'ngx-toastr';
 import { FormsModule, NgForm } from '@angular/forms';
 import { of, throwError } from 'rxjs';
 
-import { EditEmployeeComponent, userForm } from './edit-user.component';
+import { EditUserComponent, userForm } from './edit-user.component';
 import { HttpProviderService } from '../service/http-provider.service';
 
-describe('EditEmployeeComponent', () => {
-  let component: EditEmployeeComponent;
-  let fixture: ComponentFixture<EditEmployeeComponent>;
+describe('EditUserComponent', () => {
+  let component: EditUserComponent;
+  let fixture: ComponentFixture<EditUserComponent>;
   let mockActivatedRoute: any;
   let mockRouter: any;
   let mockToastrService: any;
@@ -17,7 +17,7 @@ describe('EditEmployeeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditEmployeeComponent],
+      declarations: [EditUserComponent],
       imports: [FormsModule],
     }).compileComponents();
 
@@ -43,12 +43,12 @@ describe('EditEmployeeComponent', () => {
       editUser: jasmine
         .createSpy('editUser')
         .and.returnValue(
-          of({ status: true, message: 'Employee updated successfully' })
+          of({ status: true, message: 'user updated successfully' })
         ),
     };
 
     await TestBed.configureTestingModule({
-      declarations: [EditEmployeeComponent],
+      declarations: [EditUserComponent],
       providers: [
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: Router, useValue: mockRouter },
@@ -59,7 +59,7 @@ describe('EditEmployeeComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditEmployeeComponent);
+    fixture = TestBed.createComponent(EditUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -69,7 +69,7 @@ describe('EditEmployeeComponent', () => {
   });
 
   it('should initialize the component and load user details', () => {
-    const mockEmployee = {
+    const mockUser = {
       id: 1,
       firstName: 'John',
       lastName: 'Doe',
@@ -79,14 +79,14 @@ describe('EditEmployeeComponent', () => {
     };
 
     mockHttpProviderService.getUserDetailById.and.returnValue(
-      of({ User: mockEmployee })
+      of({ User: mockUser })
     );
 
     component.ngOnInit();
 
     expect(component.userId).toBe(1);
     expect(mockHttpProviderService.getUserDetailById).toHaveBeenCalledWith(1);
-    expect(component.editUserForm).toEqual(mockEmployee);
+    expect(component.editUserForm).toEqual(mockUser);
   });
 
   it('should edit an user and show success toastr message', () => {
@@ -102,7 +102,7 @@ describe('EditEmployeeComponent', () => {
       component.editUserForm
     );
     expect(mockToastrService.success).toHaveBeenCalledWith(
-      'Employee updated successfully'
+      'user updated successfully'
     );
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/Home']);
   });
